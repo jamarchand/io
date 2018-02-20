@@ -35,9 +35,9 @@
                     $st = strpos($line, $dl);
                     
                     $protA = 'WP'.substr($exprot[1],0,10); //Get protein A
-                    $locusA = find_locus('tables/cattleya-table.txt',$protA); //Get protein locus
+                    $locusA = find_locus('QUERY-TABLE.txt',$protA); //Get protein locus
                     $protB = 'WP'.substr($exprot[2],0,10); //Get protein B
-                    $locusB = find_locus('tables/catenulae-table.txt',$protB); //Get protein B locus
+                    $locusB = find_locus('TARGET-TABLE.txt',$protB); //Get protein B locus
 
                     $protloc = $protA.','.$protB.','.$locusA.','.$locusB."\n";
                     fwrite($assigned, $protloc);
@@ -93,22 +93,22 @@
     
     ////Local database: Making local blast database of the in-group.
     print_r('Status: Generating in-group database'); print_r("\n");
-    //shell_exec("makeblastdb -in genomes/catenulae.fasta -out databases/databaseBLAST -dbtype prot -parse_seqids");
+    shell_exec("makeblastdb -in TARGETORGANISM.fasta -out databases/databaseBLAST -dbtype prot -parse_seqids");
     
     
     //Blasting ingroup: Blasting database against query organism (ex: S. cattleya)
     print_r('Status: Blasting to generate ingroup'); print_r("\n");
-    //shell_exec("blastp -query genomes/cattleya.fasta -db databases/databaseBLAST -outfmt 6 -num_alignments 1 -out ingroup.txt");
+    shell_exec("blastp -query QUERYORGANISM.fasta -db databases/databaseBLAST -outfmt 6 -num_alignments 1 -out ingroup.txt");
     
     
     print_r('Status: Matching sets and assigning loci'); print_r("\n");
-    //match_prot('ingroup.txt','_prot'); //Delimiter is specific to S. cattleya. Chose most appropriate here.
+    match_prot('ingroup.txt','_prot'); //Delimiter is specific to S. cattleya. Chose most appropriate here.
     
     print_r('Status: Trimming duplicate and ordering set'); print_r("\n");
-    //remove_dup('locus.csv'); //Remove duplicates.
+    remove_dup('locus.csv'); //Remove duplicates.
     
     print_r('Status: Clustering based on distance threashold'); print_r("\n");
-    cluster_set('unique-locus.csv', 2, 10);
+    cluster_set('unique-locus.csv', DISTANCE, THRESHOLD);
     
     
     ?>

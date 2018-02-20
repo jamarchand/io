@@ -9,7 +9,9 @@ Affiliations:1Department of Chemical and Biomolecular Engineering, University o
 ============================= ioBlast =============================
 ioBlast concept usage below. This set of software is not optimized, and meant to be used as a learning tool.
 Please read through code carefully to make necessary adjustments for personal case use. Example provided 
-should be able to replicate results shown in “Discovery of a pathway for terminal-alkyne amino acid biosynthesis”
+should be able to replicate results shown in “Discovery of a pathway for terminal-alkyne amino acid biosynthesis”. 
+If you would like to repurpose this code for your own use-case, please read through it carefully. You will most likely
+need to change delimiters specific to how proteins are named for certain organisms. 
 
 
 ioBlast.php takes 6 inputs: 
